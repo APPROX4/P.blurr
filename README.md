@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="p.blurr logo.jpg" alt="P.blurr Logo" width="130" style="border-radius: 28px;" />
+
 # P.blurr
 
 ### Premium On-Device Intimate Region Censoring for Android
@@ -26,6 +28,22 @@ Developed with a modern pitch-black white bloom aesthetic by **[APPROX](https://
 - ✏️ **Manual Mask Editing Tools**: Live interactive drawing overlay with **Rectangle (Box)**, **Circle (Round)**, **Freehand Brush**, and **Eraser** tools with full Undo/Redo history.
 - 💎 **Pitch-Black White Bloom UI**: Built with Jetpack Compose featuring smooth 60 FPS transitions, minimal glassmorphism cards, and text glyph shadow animations.
 - 🚀 **In-App Update Recommended Checker**: Automatically checks GitHub API for new releases and prompts with one-tap updates.
+
+---
+
+## 📱 Supported Devices & System Requirements
+
+Based on the codebase build configuration and runtime specifications:
+
+| Requirement Category | Specification Details |
+| -------------------- | --------------------- |
+| **Minimum OS**       | Android 8.0 Oreo (`API Level 26`) or higher |
+| **Target OS**        | Android 14 (`API Level 34`) & Android 15 compatible |
+| **CPU Architectures** | `arm64-v8a` (64-bit ARM), `armeabi-v7a` (32-bit ARM), `x86_64`, `x86` |
+| **Recommended RAM**  | 2 GB+ (for high-resolution bitmap buffer processing) |
+| **Hardware Threads** | Utilizes 4 intra-op CPU cores for ONNX NPU/CPU neural inference |
+| **Supported Image Formats** | JPEG, PNG, WEBP, HEIC, HEIF, BMP |
+| **Network Requirements** | None (Fully offline operation) |
 
 ---
 
