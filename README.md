@@ -35,7 +35,7 @@
 
 [![DOWNLOAD P.BLURR V1.0.0](https://img.shields.io/badge/DOWNLOAD_P.BLURR_V1.0.0_APK-2e7d32?style=for-the-badge&logo=android&logoColor=white)](https://github.com/APPROX4/P.blurr/releases/latest)
 
-[![VIRUSTOTAL SCANNED & VERIFIED](https://img.shields.io/badge/VIRUSTOTAL-0%2F70_CLEAN_%26_VERIFIED-1565c0?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection)
+[![VIRUSTOTAL SCANNED & VERIFIED](https://img.shields.io/badge/VIRUSTOTAL-0%2F67_CLEAN_%26_VERIFIED-1565c0?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection)
 
 <br/>
 
