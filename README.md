@@ -24,10 +24,6 @@
 
 <div align="center">
 
-## 📥 Download Latest Release
-
-<br/>
-
 <img src="https://raw.githubusercontent.com/APPROX4/P.blurr/main/pblurr_logo_rounded.png" alt="P.blurr Download" width="90" />
 
 <br/>
@@ -44,25 +40,25 @@
 
 <br/>
 
-> 🧠 **This Project is 80% AI-generated and 20% My Brain.**
+ 🧠 **This Project is 80% AI-generated and 20% My Brain.**
 
 ---
 
 </div>
 
-## ✨ Features
+##  Features
 
-- 🔒 **100% Offline Privacy**: Runs strictly local ONNX neural network inference. Zero data collection, zero network uploads.
-- ⚡ **ONNX NudeNet Model**: Powered by official `nudenet.onnx` model for instant, high-precision intimate region detection.
-- 🎯 **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
-- 🎨 **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
-- ✏️ **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
-- 💎 **Pitch-Black UI**: Modern 60 FPS Compose design with white bloom glow animations.
-- 🚀 **GitHub Release Updates**: Built-in update checker notifies you whenever a new release is published.
+-  **100% Offline Privacy**: Runs strictly local ONNX neural network inference. Zero data collection, zero network uploads.
+-  **ONNX NudeNet Model**: Powered by official `nudenet.onnx` model for instant, high-precision intimate region detection.
+-  **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
+-  **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
+-  **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
+-  **Pitch-Black UI**: Modern 60 FPS Compose design with white bloom glow animations.
+-  **GitHub Release Updates**: Built-in update checker notifies you whenever a new release is published.
 
 ---
 
-## 📱 Supported Devices
+##  Supported Devices
 
 | Category | Requirement |
 | -------- | ----------- |
@@ -74,7 +70,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose (Material 3)
@@ -83,11 +79,11 @@
 
 ---
 
-## 👤 Developer & Disclaimer
+##  Developer & Disclaimer
 
 Maintained and developed by **[APPROX](https://github.com/APPROX4)**.
 
-> 🧠 **This Project is 80% AI-generated and 20% My Brain.**
+>  **This Project is 80% AI-generated and 20% My Brain.**
 
 - **GitHub Repository**: [APPROX4/P.blurr](https://github.com/APPROX4/P.blurr)
 - **Developer Profile**: [@APPROX4](https://github.com/APPROX4)
