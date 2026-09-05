@@ -53,8 +53,6 @@
 -  **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
 -  **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
 -  **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
--  **Pitch-Black UI**: Modern 60 FPS Compose design with white bloom glow animations.
--  **GitHub Release Updates**: Built-in update checker notifies you whenever a new release is published.
 
 ---
 
@@ -66,7 +64,6 @@
 | **Architectures** | `arm64-v8a`, `armeabi-v7a`, `x86_64`, `x86` |
 | **System Memory** | 2 GB RAM minimum |
 | **Formats** | JPEG, PNG, WEBP, HEIC, HEIF, BMP |
-| **Internet** | Not required (100% Offline) |
 
 ---
 
@@ -78,18 +75,5 @@
 - **Architecture**: Clean Architecture (Data, Domain, Presentation)
 
 ---
+<h2 align="center">APPROX</h2>
 
-##  Developer & Disclaimer
-
-Maintained and developed by **[APPROX](https://github.com/APPROX4)**.
-
->  **This Project is 80% AI-generated and 20% My Brain.**
-
-- **GitHub Repository**: [APPROX4/P.blurr](https://github.com/APPROX4/P.blurr)
-- **Developer Profile**: [@APPROX4](https://github.com/APPROX4)
-
----
-
-## 📄 License
-
-Licensed under the MIT License. See [LICENSE](LICENSE) for details.
