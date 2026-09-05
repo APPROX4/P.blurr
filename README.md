@@ -6,42 +6,58 @@
 
 ### Automated On-Device Intimate Region Censoring for Android
 
-[![Download Universal APK](https://img.shields.io/badge/Download-Universal%20APK-000000?style=for-the-badge&logo=android&logoColor=white)](https://github.com/APPROX4/P.blurr/releases/latest)
-[![VirusTotal Clean](https://img.shields.io/badge/VirusTotal-0%2F70%20Clean-000000?style=for-the-badge&logo=virustotal&logoColor=00e676)](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection)
 [![AI Engine](https://img.shields.io/badge/AI-ONNX%20Runtime-000000?style=for-the-badge&logo=onnx&logoColor=white)](https://github.com/APPROX4/P.blurr)
+[![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline-000000?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/APPROX4/P.blurr)
 [![License](https://img.shields.io/badge/License-MIT-000000?style=for-the-badge)](LICENSE)
 
 <br/>
 
 </div>
+
 <div align="center">
   <img src="https://i.postimg.cc/ZYFD2qrP/Screenshot-Pblurr.png" alt="P.blurr App Screenshot" width="340" style="border-radius: 16px;" />
 </div>
 
----
-
-## 📥 Download & Security Scan
-
-| Resource | Details | Link |
-| -------- | ------- | ---- |
-| 📦 **Universal Release APK** | All Android CPUs Supported (`arm64-v8a`, `armeabi-v7a`, `x86_64`, `x86`) | [**Download Universal APK**](https://github.com/APPROX4/P.blurr/releases/latest) |
-| 🛡️ **VirusTotal Scan** | Verified 0/70 Clean (Hash `66c6373f...`) | [**View VirusTotal Report**](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection) |
+<br/>
 
 ---
 
-##  Features
+<div align="center">
 
-- **100% Offline Privacy**: Runs strictly local ONNX neural network inference. Zero data collection, zero network uploads.
-- **ONNX NudeNet Model**: Powered by official `nudenet.onnx` model for instant, high-precision intimate region detection.
-- **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
-- **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
-- **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
-- **Pitch-Black UI**: Modern 60 FPS Compose design with white bloom glow animations.
-- **GitHub Release Updates**: Built-in update checker notifies you whenever a new release is published.
+## 📥 Download Latest Release
+
+<br/>
+
+### **P.BLURR v1.0.0 (Universal APK)**
+*No Internet Required — 100% On-Device AI*
+
+<br/>
+
+[![DOWNLOAD P.BLURR V1.0.0](https://img.shields.io/badge/DOWNLOAD_P.BLURR_V1.0.0_APK-2e7d32?style=for-the-badge&logo=android&logoColor=white)](https://github.com/APPROX4/P.blurr/releases/latest)
+
+[![VIRUSTOTAL SCANNED & VERIFIED](https://img.shields.io/badge/VIRUSTOTAL-0%2F70_CLEAN_%26_VERIFIED-1565c0?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection)
+
+<br/>
+
+> 🧠 **This Project is 80% AI-generated and 20% My Brain.**
 
 ---
 
-##  Supported Devices
+</div>
+
+## ✨ Features
+
+- 🔒 **100% Offline Privacy**: Runs strictly local ONNX neural network inference. Zero data collection, zero network uploads.
+- ⚡ **ONNX NudeNet Model**: Powered by official `nudenet.onnx` model for instant, high-precision intimate region detection.
+- 🎯 **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
+- 🎨 **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
+- ✏️ **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
+- 💎 **Pitch-Black UI**: Modern 60 FPS Compose design with white bloom glow animations.
+- 🚀 **GitHub Release Updates**: Built-in update checker notifies you whenever a new release is published.
+
+---
+
+## 📱 Supported Devices
 
 | Category | Requirement |
 | -------- | ----------- |
@@ -53,7 +69,7 @@
 
 ---
 
-##  Tech Stack
+## 🛠️ Tech Stack
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose (Material 3)
@@ -62,9 +78,11 @@
 
 ---
 
-##  Developer
+## 👤 Developer & Disclaimer
 
 Maintained and developed by **[APPROX](https://github.com/APPROX4)**.
+
+> 🧠 **This Project is 80% AI-generated and 20% My Brain.**
 
 - **GitHub Repository**: [APPROX4/P.blurr](https://github.com/APPROX4/P.blurr)
 - **Developer Profile**: [@APPROX4](https://github.com/APPROX4)
