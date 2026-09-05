@@ -1,0 +1,339 @@
+package com.pblurr.app.presentation.ui.home
+
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddPhotoAlternate
+import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Security
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.pblurr.app.R
+import com.pblurr.app.presentation.ui.theme.DarkSurface
+import com.pblurr.app.presentation.ui.theme.FiraSansItalicFamily
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeScreen(
+    updateInfo: com.pblurr.app.data.update.AppUpdateInfo? = null,
+    onDismissUpdate: () -> Unit = {},
+    onPhotoSelected: (Uri) -> Unit,
+    onNavigateToSettings: () -> Unit,
+    onNavigateToDebug: () -> Unit
+) {
+    val uriHandler = androidx.compose.ui.platform.LocalUriHandler.current
+    val photoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            onPhotoSelected(uri)
+        }
+    }
+
+    if (updateInfo != null) {
+        AlertDialog(
+            onDismissRequest = onDismissUpdate,
+            containerColor = Color(0xFF121215),
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier.border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(20.dp)),
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Security,
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            },
+            title = {
+                Text(
+                    text = "Update Recommended",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            },
+            text = {
+                Column {
+                    Text(
+                        text = "A new version (v${updateInfo.latestVersion}) of P.blurr is available on GitHub!",
+                        fontSize = 13.sp,
+                        color = Color.White.copy(alpha = 0.8f)
+                    )
+                    if (!updateInfo.releaseNotes.isNullOrBlank()) {
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            text = updateInfo.releaseNotes.take(150) + if (updateInfo.releaseNotes.length > 150) "..." else "",
+                            fontSize = 11.sp,
+                            color = Color.White.copy(alpha = 0.5f)
+                        )
+                    }
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        try {
+                            uriHandler.openUri(updateInfo.releaseUrl)
+                        } catch (_: Exception) {}
+                        onDismissUpdate()
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Download Update", fontWeight = FontWeight.Bold)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onDismissUpdate) {
+                    Text("Dismiss", color = Color.White.copy(alpha = 0.6f))
+                }
+            }
+        )
+    }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        // LOGO IS PLACED HERE AND HERE ONLY (Top Bar Header)
+                        Image(
+                            painter = painterResource(id = R.drawable.pblurr_logo),
+                            contentDescription = "P.blurr Logo",
+                            modifier = Modifier
+                                .size(34.dp)
+                                .clip(CircleShape)
+                                .border(1.dp, Color.White.copy(alpha = 0.25f), CircleShape),
+                            contentScale = ContentScale.Crop
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = "P.blurr",
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FiraSansItalicFamily,
+                            fontStyle = FontStyle.Italic,
+                            color = Color.White
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = onNavigateToDebug) {
+                        Icon(
+                            imageVector = Icons.Default.BugReport,
+                            contentDescription = "Debug Log",
+                            tint = Color.White.copy(alpha = 0.7f)
+                        )
+                    }
+                    IconButton(onClick = onNavigateToSettings) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings",
+                            tint = Color.White.copy(alpha = 0.7f)
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.Black
+                )
+            )
+        },
+        containerColor = Color.Black
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Hero section (Clean Minimalist Emblem instead of duplicated logo)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(CircleShape)
+                        .background(Color.White.copy(alpha = 0.06f))
+                        .border(1.dp, Color.White.copy(alpha = 0.15f), CircleShape),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(38.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Text(
+                    text = "Intimate Region Censoring",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(6.dp))
+
+                Text(
+                    text = "100% On-Device AI • Pixel Precision • Zero Uploads",
+                    fontSize = 13.sp,
+                    color = Color.White.copy(alpha = 0.6f),
+                    textAlign = TextAlign.Center
+                )
+            }
+
+            // Primary Action Button: Photo Picker (Luxury White Bloom Glass Card)
+            Card(
+                onClick = {
+                    photoPickerLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    )
+                },
+                shape = RoundedCornerShape(24.dp),
+                colors = CardDefaults.cardColors(containerColor = DarkSurface),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(170.dp)
+                    .border(
+                        width = 1.dp,
+                        brush = Brush.verticalGradient(
+                            colors = listOf(Color.White.copy(alpha = 0.35f), Color.White.copy(alpha = 0.08f))
+                        ),
+                        shape = RoundedCornerShape(24.dp)
+                    )
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.AddPhotoAlternate,
+                        contentDescription = "Select Photo",
+                        tint = Color.White,
+                        modifier = Modifier.size(48.dp)
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "Select Photo from Gallery",
+                        fontSize = 17.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "JPEG, PNG, WEBP & HEIC Supported",
+                        fontSize = 12.sp,
+                        color = Color.White.copy(alpha = 0.5f)
+                    )
+                }
+            }
+
+            // Feature / Privacy Cards & Developer Credit
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 20.dp)
+            ) {
+                PrivacyFeatureItem(
+                    icon = Icons.Default.Security,
+                    title = "Complete On-Device Privacy",
+                    description = "Image processing runs entirely offline without internet dependencies."
+                )
+                PrivacyFeatureItem(
+                    icon = Icons.Default.Security,
+                    title = "Mask-Only Censoring",
+                    description = "Censors only detected intimate regions—never faces, people, or background."
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Developer / Owner Credit with Glowing APPROX Animation
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "P.BLURR • DEVELOPED BY ",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 1.5.sp,
+                        color = Color.White.copy(alpha = 0.4f)
+                    )
+                    com.pblurr.app.presentation.ui.settings.GlowingApproxText(fontSize = 11f)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun PrivacyFeatureItem(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    title: String,
+    description: String
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .background(Color.White.copy(alpha = 0.04f))
+            .border(1.dp, Color.White.copy(alpha = 0.08f), RoundedCornerShape(16.dp))
+            .padding(14.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = null,
+            tint = Color.White,
+            modifier = Modifier.size(24.dp)
+        )
+        Spacer(modifier = Modifier.width(14.dp))
+        Column {
+            Text(
+                text = title,
+                fontSize = 13.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White
+            )
+            Text(
+                text = description,
+                fontSize = 11.sp,
+                color = Color.White.copy(alpha = 0.5f)
+            )
+        }
+    }
+}
