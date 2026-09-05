@@ -7,7 +7,7 @@
 ### Automated On-Device Intimate Region Censoring for Android
 
 [![Download Universal APK](https://img.shields.io/badge/Download-Universal%20APK-000000?style=for-the-badge&logo=android&logoColor=white)](https://github.com/APPROX4/P.blurr/releases/latest)
-[![VirusTotal Clean](https://img.shields.io/badge/VirusTotal-0%2F70%20Clean-000000?style=for-the-badge&logo=virustotal&logoColor=00e676)](https://github.com/APPROX4/P.blurr/releases/latest)
+[![VirusTotal Clean](https://img.shields.io/badge/VirusTotal-0%2F70%20Clean-000000?style=for-the-badge&logo=virustotal&logoColor=00e676)](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection)
 [![AI Engine](https://img.shields.io/badge/AI-ONNX%20Runtime-000000?style=for-the-badge&logo=onnx&logoColor=white)](https://github.com/APPROX4/P.blurr)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline-000000?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/APPROX4/P.blurr)
 [![License](https://img.shields.io/badge/License-MIT-000000?style=for-the-badge)](LICENSE)
@@ -20,12 +20,20 @@
 
 </div>
 
+## 📸 Interface Showcase
+
+<div align="center">
+  <img src="https://i.postimg.cc/ZYFD2qrP/Screenshot-Pblurr.png" alt="P.blurr App Screenshot" width="340" style="border-radius: 16px;" />
+</div>
+
+---
+
 ## 📥 Download & Security Scan
 
 | Resource | Details | Link |
 | -------- | ------- | ---- |
 | 📦 **Universal Release APK** | All Android CPUs Supported (`arm64-v8a`, `armeabi-v7a`, `x86_64`, `x86`) | [**Download Universal APK**](https://github.com/APPROX4/P.blurr/releases/latest) |
-| 🛡️ **VirusTotal Scan** | Verified 0/70 Clean (No Malware / Adware) | [**View VirusTotal Report**](https://github.com/APPROX4/P.blurr/releases/latest) |
+| 🛡️ **VirusTotal Scan** | Verified 0/70 Clean (Hash `66c6373f...`) | [**View VirusTotal Report**](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection) |
 
 ---
 
