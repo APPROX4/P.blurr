@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="pblurr_logo_rounded.png" alt="P.blurr Logo" width="120" />
+<img src="https://raw.githubusercontent.com/APPROX4/P.blurr/main/pblurr_logo_rounded.png" alt="P.blurr Logo" width="120" />
 
 # P.blurr
 
@@ -26,6 +26,11 @@
 
 ## 📥 Download Latest Release
 
+<br/>
+
+<img src="https://raw.githubusercontent.com/APPROX4/P.blurr/main/pblurr_logo_rounded.png" alt="P.blurr Download" width="90" />
+
+<br/>
 <br/>
 
 ### **P.BLURR v1.0.0 (Universal APK)**
