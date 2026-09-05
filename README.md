@@ -9,19 +9,11 @@
 [![Download Universal APK](https://img.shields.io/badge/Download-Universal%20APK-000000?style=for-the-badge&logo=android&logoColor=white)](https://github.com/APPROX4/P.blurr/releases/latest)
 [![VirusTotal Clean](https://img.shields.io/badge/VirusTotal-0%2F70%20Clean-000000?style=for-the-badge&logo=virustotal&logoColor=00e676)](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection)
 [![AI Engine](https://img.shields.io/badge/AI-ONNX%20Runtime-000000?style=for-the-badge&logo=onnx&logoColor=white)](https://github.com/APPROX4/P.blurr)
-[![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline-000000?style=for-the-badge&logo=shield&logoColor=white)](https://github.com/APPROX4/P.blurr)
 [![License](https://img.shields.io/badge/License-MIT-000000?style=for-the-badge)](LICENSE)
 
 <br/>
 
-**[📦 Download Universal Release APK](https://github.com/APPROX4/P.blurr/releases/latest)** • **[🛡️ Security Policy](SECURITY.md)**
-
----
-
 </div>
-
-## 📸 Interface Showcase
-
 <div align="center">
   <img src="https://i.postimg.cc/ZYFD2qrP/Screenshot-Pblurr.png" alt="P.blurr App Screenshot" width="340" style="border-radius: 16px;" />
 </div>
@@ -37,19 +29,19 @@
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🔒 **100% Offline Privacy**: Runs strictly local ONNX neural network inference. Zero data collection, zero network uploads.
-- ⚡ **ONNX NudeNet Model**: Powered by official `nudenet.onnx` model for instant, high-precision intimate region detection.
-- 🎯 **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
-- 🎨 **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
-- ✏️ **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
-- 💎 **Pitch-Black UI**: Modern 60 FPS Compose design with white bloom glow animations.
-- 🚀 **GitHub Release Updates**: Built-in update checker notifies you whenever a new release is published.
+- **100% Offline Privacy**: Runs strictly local ONNX neural network inference. Zero data collection, zero network uploads.
+- **ONNX NudeNet Model**: Powered by official `nudenet.onnx` model for instant, high-precision intimate region detection.
+- **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
+- **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
+- **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
+- **Pitch-Black UI**: Modern 60 FPS Compose design with white bloom glow animations.
+- **GitHub Release Updates**: Built-in update checker notifies you whenever a new release is published.
 
 ---
 
-## 📱 Supported Devices
+##  Supported Devices
 
 | Category | Requirement |
 | -------- | ----------- |
@@ -61,7 +53,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose (Material 3)
@@ -70,7 +62,7 @@
 
 ---
 
-## 👤 Developer
+##  Developer
 
 Maintained and developed by **[APPROX](https://github.com/APPROX4)**.
 
