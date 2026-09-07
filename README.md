@@ -29,14 +29,14 @@
 <br/>
 <br/>
 
-### **P.BLURR v1.0.0 (Universal APK)**
+### **P.BLURR v1.0.1 (Universal APK)**
 *No Internet Required — 100% On-Device AI*
 
 <br/>
 
-[![DOWNLOAD P.BLURR V1.0.0](https://img.shields.io/badge/DOWNLOAD_P.BLURR_V1.0.0_APK-2e7d32?style=for-the-badge&logo=android&logoColor=white)](https://github.com/APPROX4/P.blurr/releases/latest)
+[![DOWNLOAD P.BLURR V1.0.1](https://img.shields.io/badge/DOWNLOAD_P.BLURR_V1.0.1_APK-2e7d32?style=for-the-badge&logo=android&logoColor=white)](https://github.com/APPROX4/P.blurr/releases/latest)
 
-[![VIRUSTOTAL SCANNED & VERIFIED](https://img.shields.io/badge/VIRUSTOTAL-0%2F67_CLEAN_%26_VERIFIED-1565c0?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file/66c6373fb2a4c98e9e64061b80dac92f05917d98c5c233de03a19f29065d43e9/detection)
+[![VIRUSTOTAL SCANNED & VERIFIED](https://img.shields.io/badge/VIRUSTOTAL-0%2F67_CLEAN_%26_VERIFIED-1565c0?style=for-the-badge&logo=virustotal&logoColor=white)](https://www.virustotal.com/gui/file-analysis/YzEzOTZjYTViMGQ2MTVhNjAxNDVjNmRhZmUwM2JkMjI6MTc4ODc5MjMwOA==)
 
 <br/>
 
@@ -51,6 +51,7 @@
 -  **100% Offline Privacy**: Runs strictly local ONNX neural network inference. Zero data collection, zero network uploads.
 -  **ONNX NudeNet Model**: Powered by official `nudenet.onnx` model for instant, high-precision intimate region detection.
 -  **Targeted Region Masking**: Automatically censors exposed breasts, genitalia, and buttocks while keeping faces and backgrounds untouched.
+-  **Original EXIF Date Preservation**: "Save Normal" mode preserves original capture timestamps & EXIF metadata seamlessly.
 -  **Pixelate & Blur Effects**: Easily toggle between pixel block censorship and smooth Gaussian blur.
 -  **Manual Drawing Shape Tools**: Draw custom rectangular boxes, circles, freehand brush masks, or erase with live interactive canvas controls.
 
@@ -76,4 +77,3 @@
 
 ---
 <h2 align="center">APPROX</h2>
-

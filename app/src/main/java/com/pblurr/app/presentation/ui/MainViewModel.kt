@@ -49,9 +49,17 @@ sealed class UIState {
     data class Error(val message: String) : UIState()
 }
 
+enum class VersionStatus {
+    NOT_CHECKED,
+    LATEST,
+    OUTDATED
+}
+
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val context = application.applicationContext
+
+    val currentInstalledVersion: String = "1.0.1"
 
     private val detector = com.pblurr.app.data.inference.OnnxPrivateRegionDetector(context)
     private val detectPrivateRegionsUseCase = DetectPrivateRegionsUseCase(detector)
@@ -71,12 +79,76 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _updateInfo = MutableStateFlow<com.pblurr.app.data.update.AppUpdateInfo?>(null)
     val updateInfo: StateFlow<com.pblurr.app.data.update.AppUpdateInfo?> = _updateInfo.asStateFlow()
 
+    private val _versionStatus = MutableStateFlow(VersionStatus.NOT_CHECKED)
+    val versionStatus: StateFlow<VersionStatus> = _versionStatus.asStateFlow()
+
+    private val _isCheckingUpdates = MutableStateFlow(false)
+    val isCheckingUpdates: StateFlow<Boolean> = _isCheckingUpdates.asStateFlow()
+
+    private val _manualUpdateResult = MutableStateFlow<String?>(null)
+    val manualUpdateResult: StateFlow<String?> = _manualUpdateResult.asStateFlow()
+
+    var currentSourceUri: Uri? = null
+        private set
+
     init {
+        // Apply persisted logging setting on startup
+        AppLogger.isEnabled = _censorOptions.value.loggingEnabled
+
+        if (_censorOptions.value.autoUpdateCheckEnabled) {
+            viewModelScope.launch {
+                val update = updateChecker.checkForUpdates()
+                if (update != null) {
+                    _updateInfo.value = update
+                    _versionStatus.value = VersionStatus.OUTDATED
+                } else {
+                    _versionStatus.value = VersionStatus.LATEST
+                }
+            }
+        }
+    }
+
+    fun checkUpdatesManually() {
         viewModelScope.launch {
+            _isCheckingUpdates.value = true
+            _manualUpdateResult.value = null
+            AppLogger.i(LogCategory.APP, "Manual update check initiated by user")
             val update = updateChecker.checkForUpdates()
+            _isCheckingUpdates.value = false
             if (update != null) {
                 _updateInfo.value = update
+                _versionStatus.value = VersionStatus.OUTDATED
+                _manualUpdateResult.value = "Update v${update.latestVersion} is available on GitHub!"
+            } else {
+                _versionStatus.value = VersionStatus.LATEST
+                _manualUpdateResult.value = "You are running the latest version of P.blurr."
             }
+        }
+    }
+
+    fun completeOnboarding(autoUpdateEnabled: Boolean) {
+        val current = _censorOptions.value
+        val updated = current.copy(
+            hasCompletedOnboarding = true,
+            autoUpdateCheckEnabled = autoUpdateEnabled,
+            hasAcceptedInternetNotice = current.hasAcceptedInternetNotice || autoUpdateEnabled
+        )
+        updateCensorOptions(updated)
+        AppLogger.i(LogCategory.APP, "Onboarding setup completed. Auto-update: $autoUpdateEnabled")
+    }
+
+    fun clearManualUpdateResult() {
+        _manualUpdateResult.value = null
+    }
+
+    fun restartApp() {
+        AppLogger.i(LogCategory.APP, "App restart requested due to settings change.")
+        val pm = context.packageManager
+        val intent = pm.getLaunchIntentForPackage(context.packageName)
+        if (intent != null) {
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            context.startActivity(intent)
+            Runtime.getRuntime().exit(0)
         }
     }
 
@@ -114,6 +186,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val exportResult: StateFlow<Result<Uri>?> = _exportResult.asStateFlow()
 
     fun processImageUri(uri: Uri) {
+        currentSourceUri = uri
         viewModelScope.launch {
             _uiState.value = UIState.Processing(ProcessingStage.LoadingImage)
             AppLogger.i(LogCategory.APP, "Selected image URI: $uri")
@@ -194,6 +267,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateCensorOptions(newOptions: CensorOptions) {
         val oldOptions = _censorOptions.value
         _censorOptions.value = newOptions
+        AppLogger.isEnabled = newOptions.loggingEnabled
         settingsRepository.save(newOptions)  // persist immediately
         val original = currentOriginalBitmap ?: return
 
@@ -346,11 +420,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun exportCensoredImage() {
+    fun exportCensoredImage(stripExif: Boolean) {
         val bitmapToSave = currentCensoredBitmap ?: return
         viewModelScope.launch {
             _exportResult.value = null
-            val result = exportImageUseCase(bitmapToSave)
+            val result = exportImageUseCase(
+                bitmap = bitmapToSave,
+                stripExif = stripExif,
+                sourceUri = currentSourceUri
+            )
             _exportResult.value = result
         }
     }

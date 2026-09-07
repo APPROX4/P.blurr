@@ -12,11 +12,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.BlurOn
 import androidx.compose.material.icons.filled.BugReport
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.GridOn
 import androidx.compose.material.icons.filled.Layers
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Photo
 import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.Security
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -44,22 +46,139 @@ fun EditorScreen(
     onToggleMaskOverlay: () -> Unit,
     onToggleRawBoxes: () -> Unit,
     onOpenManualEditor: () -> Unit,
-    onSaveImage: () -> Unit,
+    onSaveImage: (stripExif: Boolean) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToDebug: () -> Unit
 ) {
     var selectedTab by remember { mutableStateOf(0) } // 0: Censor Effect, 1: Detection Settings
+    var showSaveModalDialog by remember { mutableStateOf(false) }
+
+    // Save Privacy Mode Selection Modal
+    if (showSaveModalDialog) {
+        AlertDialog(
+            onDismissRequest = { showSaveModalDialog = false },
+            containerColor = Color(0xFF121215),
+            shape = RoundedCornerShape(22.dp),
+            modifier = Modifier.border(1.dp, Color.White.copy(alpha = 0.25f), RoundedCornerShape(22.dp)),
+            icon = {
+                Icon(Icons.Default.Save, contentDescription = null, tint = Color.White, modifier = Modifier.size(30.dp))
+            },
+            title = {
+                Text(
+                    "Export Image Options",
+                    fontSize = 19.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            },
+            text = {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    Text(
+                        "Select how you want to export this censored image to your gallery:",
+                        fontSize = 13.sp,
+                        color = Color.White.copy(alpha = 0.8f)
+                    )
+
+                    // Option 1: Save with Privacy Mode (Remove EXIF)
+                    Card(
+                        onClick = {
+                            showSaveModalDialog = false
+                            onSaveImage(true)
+                        },
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.08f)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .border(1.dp, Color.White.copy(alpha = 0.2f), RoundedCornerShape(16.dp))
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(14.dp)
+                        ) {
+                            Icon(Icons.Default.Security, contentDescription = null, tint = Color.White, modifier = Modifier.size(24.dp))
+                            Spacer(Modifier.width(12.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    "Save with Privacy Mode",
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White
+                                )
+                                Spacer(Modifier.height(2.dp))
+                                Text(
+                                    "Strips all hidden EXIF metadata (GPS location, date, time & camera model)",
+                                    fontSize = 11.sp,
+                                    color = Color.White.copy(alpha = 0.6f)
+                                )
+                            }
+                        }
+                    }
+
+                    // Option 2: Save Normal (Preserve EXIF)
+                    Card(
+                        onClick = {
+                            showSaveModalDialog = false
+                            onSaveImage(false)
+                        },
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.04f)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .border(1.dp, Color.White.copy(alpha = 0.12f), RoundedCornerShape(16.dp))
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(14.dp)
+                        ) {
+                            Icon(Icons.Default.Photo, contentDescription = null, tint = Color.White.copy(alpha = 0.8f), modifier = Modifier.size(24.dp))
+                            Spacer(Modifier.width(12.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    "Save Normal (Keep Metadata)",
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White.copy(alpha = 0.9f)
+                                )
+                                Spacer(Modifier.height(2.dp))
+                                Text(
+                                    "Preserves original photo location, date, time and camera tags",
+                                    fontSize = 11.sp,
+                                    color = Color.White.copy(alpha = 0.5f)
+                                )
+                            }
+                        }
+                    }
+                }
+            },
+            confirmButton = {},
+            dismissButton = {
+                TextButton(onClick = { showSaveModalDialog = false }) {
+                    Text("Cancel", color = Color.White.copy(alpha = 0.6f))
+                }
+            }
+        )
+    }
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        "Censor Editor",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            "Censor Editor",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
@@ -74,11 +193,14 @@ fun EditorScreen(
                             tint = if (showMaskOverlay) Color.White else Color.White.copy(alpha = 0.4f)
                         )
                     }
-                    IconButton(onClick = onNavigateToDebug) {
-                        Icon(Icons.Default.BugReport, contentDescription = "Diagnostics", tint = Color.White)
+                    if (censorOptions.loggingEnabled) {
+                        IconButton(onClick = onNavigateToDebug) {
+                            Icon(Icons.Default.BugReport, contentDescription = "Diagnostics", tint = Color.White)
+                        }
                     }
+                    Spacer(Modifier.width(4.dp))
                     Button(
-                        onClick = onSaveImage,
+                        onClick = { showSaveModalDialog = true },
                         modifier = Modifier.padding(end = 8.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White)
                     ) {

@@ -18,7 +18,7 @@ class UpdateChecker {
 
     companion object {
         private const val GITHUB_RELEASE_API = "https://api.github.com/repos/APPROX4/P.blurr/releases/latest"
-        const val CURRENT_VERSION_NAME = "1.0.0"
+        const val CURRENT_VERSION_NAME = "1.0.1"
     }
 
     suspend fun checkForUpdates(): AppUpdateInfo? = withContext(Dispatchers.IO) {

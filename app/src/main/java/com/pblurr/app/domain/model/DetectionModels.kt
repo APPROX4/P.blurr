@@ -43,12 +43,17 @@ sealed class CensorEffect {
 }
 
 /**
- * Configurable parameters for mask refinement and censor rendering.
+ * Configurable parameters for mask refinement, system logging, update checks, and export privacy.
  */
 data class CensorOptions(
     val maskDilationPx: Int = 4,
     val featherEdges: Boolean = true,
-    val effect: CensorEffect = CensorEffect.Pixelate(28)
+    val effect: CensorEffect = CensorEffect.Pixelate(28),
+    val loggingEnabled: Boolean = true,
+    val autoUpdateCheckEnabled: Boolean = false,
+    val stripExifMetadata: Boolean = true,
+    val hasAcceptedInternetNotice: Boolean = false,
+    val hasCompletedOnboarding: Boolean = false
 )
 
 /**

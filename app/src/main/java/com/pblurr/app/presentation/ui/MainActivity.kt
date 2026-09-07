@@ -20,11 +20,13 @@ import com.pblurr.app.presentation.ui.debug.DebugScreen
 import com.pblurr.app.presentation.ui.editor.EditorScreen
 import com.pblurr.app.presentation.ui.editor.manual.ManualMaskEditorScreen
 import com.pblurr.app.presentation.ui.home.HomeScreen
+import com.pblurr.app.presentation.ui.onboarding.OnboardingScreen
 import com.pblurr.app.presentation.ui.processing.ProcessingScreen
 import com.pblurr.app.presentation.ui.settings.SettingsScreen
 import com.pblurr.app.presentation.ui.theme.PblurrTheme
 
 sealed class Screen(val route: String) {
+    object Onboarding : Screen("onboarding")
     object Home : Screen("home")
     object Processing : Screen("processing")
     object Editor : Screen("editor")
@@ -77,12 +79,25 @@ fun PblurrNavHost(viewModel: MainViewModel) {
         }
     }
 
+    val startRoute = if (!censorOptions.hasCompletedOnboarding) Screen.Onboarding.route else Screen.Home.route
+
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = startRoute
     ) {
+        composable(Screen.Onboarding.route) {
+            OnboardingScreen(
+                onCompleteOnboarding = { autoUpdateEnabled ->
+                    viewModel.completeOnboarding(autoUpdateEnabled)
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Onboarding.route) { inclusive = true }
+                    }
+                }
+            )
+        }
         composable(Screen.Home.route) {
             HomeScreen(
+                censorOptions = censorOptions,
                 updateInfo = updateInfo,
                 onDismissUpdate = { viewModel.dismissUpdate() },
                 onPhotoSelected = { uri ->
@@ -131,7 +146,7 @@ fun PblurrNavHost(viewModel: MainViewModel) {
                     onToggleMaskOverlay = { viewModel.toggleMaskOverlay() },
                     onToggleRawBoxes = { viewModel.toggleRawBoxes() },
                     onOpenManualEditor = { navController.navigate(Screen.ManualEditor.route) },
-                    onSaveImage = { viewModel.exportCensoredImage() },
+                    onSaveImage = { stripExif -> viewModel.exportCensoredImage(stripExif) },
                     onNavigateBack = { navController.navigate(Screen.Home.route) },
                     onNavigateToDebug = { navController.navigate(Screen.Debug.route) }
                 )
@@ -161,9 +176,20 @@ fun PblurrNavHost(viewModel: MainViewModel) {
         }
 
         composable(Screen.Settings.route) {
+            val isCheckingUpdates by viewModel.isCheckingUpdates.collectAsState()
+            val manualUpdateResult by viewModel.manualUpdateResult.collectAsState()
+            val versionStatus by viewModel.versionStatus.collectAsState()
             SettingsScreen(
                 censorOptions = censorOptions,
+                installedVersion = viewModel.currentInstalledVersion,
+                versionStatus = versionStatus,
+                updateInfo = updateInfo,
+                isCheckingUpdates = isCheckingUpdates,
+                manualUpdateResult = manualUpdateResult,
                 onUpdateOptions = { viewModel.updateCensorOptions(it) },
+                onCheckUpdatesManually = { viewModel.checkUpdatesManually() },
+                onClearManualUpdateResult = { viewModel.clearManualUpdateResult() },
+                onRestartApp = { viewModel.restartApp() },
                 onResetSettings = { viewModel.resetSettings() },
                 onNavigateBack = { navController.navigateUp() },
                 onNavigateToDebug = { navController.navigate(Screen.Debug.route) }

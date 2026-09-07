@@ -11,6 +11,8 @@ import java.util.Date
 import java.util.Locale
 
 object AppLogger {
+    var isEnabled: Boolean = true
+
     private val _logs = MutableStateFlow<List<LogEntry>>(emptyList())
     val logs: StateFlow<List<LogEntry>> = _logs.asStateFlow()
 
@@ -24,6 +26,7 @@ object AppLogger {
         message: String,
         details: String? = null
     ) {
+        if (!isEnabled) return
         val entry = LogEntry(
             timestamp = System.currentTimeMillis(),
             level = level,

@@ -60,7 +60,14 @@ fun DebugScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("System Diagnostics Log", fontWeight = FontWeight.Bold, color = Color.White) },
+                title = {
+                    Row(
+                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
+                        modifier = Modifier.padding(start = 8.dp)
+                    ) {
+                        Text("System Diagnostics Log", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 18.sp)
+                    }
+                },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
